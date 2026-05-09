@@ -35,13 +35,13 @@ const App = () => {
         return window.Sk.builtinFiles['files'][x];
     };
 
-    // parseSimpleCommands tidak digunakan lagi (boleh dihapus)
+    // Tidak ada parsing, kode langsung dikirim ke Skulpt
     const parseSimpleCommands = (code) => code;
 
     const runit = (code, forceReset = false) => {
         setIsRunning(true);
         setOutput('');
-        // IMPORTS DIHAPUS: tidak menambahkan apapun ke kode user
+        // Kode murni dari pengguna, tanpa tambahan import
         const prog = forceReset ? '' : pythonCode;
 
         window.Sk.pre = "output";
@@ -160,7 +160,8 @@ const App = () => {
             <Container fluid style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto' }}>
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: isMobile ? '1fr' : '1fr 420px',
+                    // Kolom kanan diperlebar agar canvas 400px + padding nyaman
+                    gridTemplateColumns: isMobile ? '1fr' : '1fr 440px',
                     gap: '1.5rem',
                     alignItems: 'start'
                 }}>
@@ -263,7 +264,8 @@ const App = () => {
                         border: `1px solid ${currentTheme.border}`,
                         display: 'flex',
                         flexDirection: 'column',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        justifyContent: 'center'   // Pusatkan vertikal & horizontal
                     }}>
                         <div style={{
                             fontWeight: '500',
@@ -276,10 +278,10 @@ const App = () => {
                         <div
                             id="mycanvas"
                             style={{
-                                width: '100%',
-                                aspectRatio: '1 / 1',
+                                width: '405px',         // Ukuran tetap
+                                height: '405px',
                                 background: theme === 'light' ? '#ffffff' : '#1a1a2e',
-                                borderRadius: '16px',
+                                borderRadius: '0px',     // Kotak tajam
                                 border: `2px solid ${currentTheme.canvasBorder}`,
                                 boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
                             }}
